@@ -27,32 +27,30 @@ for (let [index, value, left, right] of rawNodes) {
     if (right !== null) nodes[index].right = nodes[right];
 }
 
-function getIsNodeCorrect(root) {
-    let isLeftChildCorrect = !root.left || root.value > root.left.value;
-    let isRightChildCorrect = !root.right || root.value < root.right.value;
-
-    return isLeftChildCorrect && isRightChildCorrect;
-}
-
-function isBinaryTree(root, isBinary = true) {
-    console.log(root?.value);
-
-    if (!root) {
-        return isBinary;
+function isBinaryTree(node, min = -Infinity, max = Infinity) {
+    if (!node) {
+        return true;
     }
-    if (getIsNodeCorrect(root)) {
-        isBinary = isBinaryTree(root.right);
-        isBinary = isBinaryTree(root.left);
-    } else {
+    if (!(node.value > min && node.value < max)) {
         return false;
     }
-
-    return isBinary;
+    return isBinaryTree(node.left, min, node.value) && isBinaryTree(node.right, node.value, max);
 }
 
 function solution(root) {
-    // Пройтись по всем нодам и проверить что дети корректные - нет! нужно еще учитывать текущий минимум и максимум
+    // Пройтись по всем нодам и проверить что дети корректные
     return isBinaryTree(root);
+}
+
+function test() {
+    var node1 = new CNode(1, null, null);
+    var node2 = new CNode(4, null, null);
+    var node3 = new CNode(3, node1, node2);
+    var node4 = new CNode(8, null, null);
+    var node5 = new CNode(5, node3, node4);
+    console.assert(solution(node5));
+    node4.value = 5;
+    console.assert(!solution(node5));
 }
 
 function test() {
