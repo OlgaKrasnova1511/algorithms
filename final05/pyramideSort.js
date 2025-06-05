@@ -45,7 +45,7 @@ function heapAdd(heap, item) {
     siftUp(heap, heap.length - 1);
 }
 
-function siftDown(heap, idx) {
+function siftDown(heap, idx, compare) {
     const size = heap.length;
 
     while (2 * idx < size) {
@@ -67,16 +67,16 @@ function siftDown(heap, idx) {
     }
 }
 
-function popMax(heap) {
+function popMax(heap, compare) {
     if (heap.length <= 1) return null;
     const max = heap[1];
     heap[1] = heap[heap.length - 1];
     heap.pop();
-    siftDown(heap, 1);
+    siftDown(heap, 1, compare);
     return max;
 }
 
-function heapSort(array) {
+function heapSort(array, compare) {
     const heap = [null];
 
     for (const item of array) {
@@ -85,7 +85,7 @@ function heapSort(array) {
 
     const sorted = [];
     while (heap.length > 1) {
-        sorted.push(popMax(heap));
+        sorted.push(popMax(heap, compare));
     }
     return sorted;
 }
@@ -103,7 +103,7 @@ function solve(inputLines) {
         });
     }
 
-    const sorted = heapSort(participants);
+    const sorted = heapSort(participants, compare);
     console.log(sorted.map(p => p.login).join('\n'));
 }
 
