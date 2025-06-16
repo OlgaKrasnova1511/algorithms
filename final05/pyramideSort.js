@@ -1,3 +1,4 @@
+// ПРЕДЫДУЩИЙ ВАРИАНТ
 // https://contest.yandex.ru/contest/24810/run-report/139021753/
 
 // * опишите принцип работы вашего алгоритма;
@@ -20,7 +21,7 @@
 // Сложность пирамидальной сортировки в худшем случае — O(nlogn)
 // Память. Для описанной реализации алгоритма пирамидальной сортировки нужно выделить память под массив из n элементов, т.е. потребуется O(n) дополнительной памяти (heap). Также создаётся массив для результата, тоже O(n) (sorted).
 
-
+// ПРЕДЫДУЩИЙ ВАРИАНТ
 
 function compare(a, b) {
     if (a.points !== b.points) return a.points > b.points;
@@ -75,6 +76,7 @@ function popMax(heap, compare) {
     siftDown(heap, 1, compare);
     return max;
 }
+
 
 function heapSort(array, compare) {
     const heap = [null];
